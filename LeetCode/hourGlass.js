@@ -16,19 +16,17 @@ let arrary = [
 function hourglassSum(arr, column = 0, row = 0, newArray = [], temp = 0) {
   if (row >= 4) return Math.max(...newArray);
   for (let i = 0; i < 3; i++) {
-    temp = temp + arr[row][column + i];
+    temp += arr[row][column + i];
+    temp += arr[row + 2][column + i];
   }
-  for (let i = 0; i < 3; i++) {
-    temp = temp + arr[row + 2][column + i];
-  }
-  temp = temp + arr[row + 1][column + 1];
+
+  temp += arr[row + 1][column + 1];
   newArray.push(temp);
   temp = 0;
   if (column <= 2) {
     return hourglassSum(arr, column + 1, row, newArray, temp);
   }
   column = 0;
-  temp = 0;
   return hourglassSum(arr, column, row + 1, newArray, temp);
 }
 
